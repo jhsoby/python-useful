@@ -53,7 +53,7 @@ def transkripsjon(russiskord):
 		if isinstance(russisk[bokstav], list):
 			if bokstav == u"е":
 				if (" " + russ)[-2] in u" ьъ":
-					if norsk[-1] in "sz":
+					if (" " + norsk)[-1] in "sz":
 						norsk += russisk[bokstav][1]
 					else:
 						norsk += russisk[bokstav][0]
