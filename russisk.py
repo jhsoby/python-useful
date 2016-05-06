@@ -10,7 +10,7 @@ russisk = {
 	u"в": "v",
 	u"г": "g",
 	u"д": "d",
-	u"е": ["je", "e"], # "e" vanligvis, "je" først i ord eller etter vokal, Ь eller Ъ
+	u"е": ["je", "ie", "e"], # "e" vanligvis, "je" først i ord eller etter vokal, Ь eller Ъ, "ie" etter transkripsjon som slutter på "s" eller "z"
 	u"ё": ["jo", "io", "o"], # "jo" vanligvis, "io" etter "s" og "z", "o" etter "j"
 	u"ж": "zj",
 	u"з": "z",
@@ -53,11 +53,14 @@ def transkripsjon(russiskord):
 		if isinstance(russisk[bokstav], list):
 			if bokstav == u"е":
 				if (" " + russ)[-2] in u" ьъ":
-					norsk += russisk[bokstav][0]
+					if norsk[-1] in "sz":
+						norsk += russisk[bokstav][1]
+					else:
+						norsk += russisk[bokstav][0]
 				elif (" " + norsk)[-1] in "aeiouy":
 					norsk += russisk[bokstav][0]
 				else:
-					norsk += russisk[bokstav][1]
+					norsk += russisk[bokstav][2]
 			elif (" " + norsk)[-1] == "j":
 				norsk += russisk[bokstav][2]
 			elif (" " + norsk)[-1] in "sz":
